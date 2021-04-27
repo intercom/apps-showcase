@@ -1,4 +1,8 @@
 class RecentOrdersController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:initialize]
+  # , :submit_url, :submit_sheet_url
+  # after_action :allow_iframe, only: :submit_sheet_url
+
   def initialize
     Rails.logger.info("Params for initialize_url:#{params}")
     render json: {
