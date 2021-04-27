@@ -4,25 +4,23 @@ class RecentOrdersController < ApplicationController
   # after_action :allow_iframe, only: :submit_sheet_url
 
   def initialize_url
+    latest_order = Orders.order(:created_at).first
+    Rails.logger.info("Latest order:#{latest_order}")
     Rails.logger.info("Params for initialize_url:#{params}")
     render json: {
       canvas: {
         content: {
           components: [
-              {
-                "type": "input",
-                "id": "address",
-                "label": "Address",
-                "placeholder": "Enter address here...",
-                "save_state": "unsaved"
-              },
-              {
-                "type": "input",
-                "id": "pincode",
-                "label": "Pincode",
-                "placeholder": "Enter pincode here...",
-                "save_state": "unsaved"
-              },
+            {
+              "type": "text",
+              "text": "*Cancel your order*",
+              "style": "header"
+            },
+            {
+              "type": "text",
+              "text": "Order id #{latest_order.id}",
+              "style": "header"
+            },
             { type: "button", 
             label: "Verify your details", 
             style: "primary", 
