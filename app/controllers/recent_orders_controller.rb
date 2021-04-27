@@ -4,7 +4,7 @@ class RecentOrdersController < ApplicationController
   # after_action :allow_iframe, only: :submit_sheet_url
 
   def initialize_url
-    latest_order = Orders.order(:created_at).first
+    latest_order = Order.order(:created_at).first
     Rails.logger.info("Latest order:#{latest_order}")
     Rails.logger.info("Params for initialize_url:#{params}")
     render json: {
