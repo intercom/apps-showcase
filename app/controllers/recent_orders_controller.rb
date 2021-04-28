@@ -201,6 +201,5 @@ class RecentOrdersController < ApplicationController
         },
       }
     end
-
   end
 end
