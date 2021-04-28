@@ -16,7 +16,7 @@ class RecentOrdersController < ApplicationController
             {
               "type": "text",
               "text": "This is your latest order",
-              "style": "text"
+              "style": "paragraph"
             },
             {
               "type": "text",
@@ -37,7 +37,7 @@ class RecentOrdersController < ApplicationController
             {
               "type": "text",
               "text": "Do you want to cancel this one, or another?",
-              "style": "text"
+              "style": "paragraph"
             },
             { 
               type: "button", 
