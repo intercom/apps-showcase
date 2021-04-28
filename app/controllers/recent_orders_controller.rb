@@ -60,8 +60,8 @@ class RecentOrdersController < ApplicationController
   end
 
   def submit_url
-    Rails.logger.info("Component id:#{params}")
-    if params[:component_id] == "cancel_order"
+    case params[:component_id]
+    when /\Acancel_order_/
       render json: {
         canvas: {
           content: {
@@ -80,63 +80,63 @@ class RecentOrdersController < ApplicationController
                 type: "button", 
                 label: "Takes too long", 
                 style: "secondary", 
-                id: "time", 
+                id: "reason_time", 
                 action: {type: "submit"} 
               },
               { 
                 type: "button", 
                 label: "Mistake in my customer data", 
                 style: "secondary", 
-                id: "data_mistake", 
+                id: "reason_data_mistake", 
                 action: {type: "submit"} 
               },
               { 
                 type: "button", 
                 label: "Ordered incorrectly", 
                 style: "secondary", 
-                id: "ordered_incorrectly", 
+                id: "reason_ordered_incorrectly", 
                 action: {type: "submit"} 
               },
               { 
                 type: "button", 
                 label: "Purchase price is too high", 
                 style: "secondary", 
-                id: "price", 
+                id: "reason_price", 
                 action: {type: "submit"} 
               },
               { 
                 type: "button", 
                 label: "Don't want a credit/identity check", 
                 style: "secondary", 
-                id: "credit_check", 
+                id: "reason_credit_check", 
                 action: {type: "submit"} 
               },
               { 
                 type: "button", 
                 label: "Changed my mind", 
                 style: "secondary", 
-                id: "changed_mind", 
+                id: "reason_changed_mind", 
                 action: {type: "submit"} 
               },
               { 
                 type: "button", 
                 label: "Forgot to use a voucher", 
                 style: "secondary", 
-                id: "voucher", 
+                id: "reason_voucher", 
                 action: {type: "submit"} 
               },
               { 
                 type: "button", 
                 label: "Other", 
                 style: "secondary", 
-                id: "other", 
+                id: "reason_other", 
                 action: {type: "submit"} 
               },
             ], 
           },
         },
       }
-    elsif params[:component_id] == "choose_another"
+    when "choose_another"
       render json: {
         canvas: {
           content: {
@@ -205,6 +205,58 @@ class RecentOrdersController < ApplicationController
           },
         },
       }
+    when /\Areason_/
+      render json: {
+        canvas: {
+          content: {
+            components: [
+              {
+                "type": "text",
+                "text": "*Please help us out*",
+                "style": "header"
+              },
+              {
+                "type": "textarea",
+                "id": "feedback",
+                "label": "Any additional comments? Feel free to leave them here",
+                "placeholder": "Leave your feedback..."
+              },
+              { 
+                type: "button", 
+                label: "Submit feedback", 
+                style: "primary", 
+                id: "submit_feedback", 
+                action: {type: "submit"} 
+              },
+              { 
+                type: "button", 
+                label: "Skip", 
+                style: "secondary", 
+                id: "skip", 
+                action: {type: "submit"} 
+              }
+            ], 
+          },
+        },
+      }
+    when "submit_feedback"
+      render json: {
+        canvas: {
+          content: {
+            components: [
+              {
+                "type": "text",
+                "text": "Thank you for your feedback",
+                "style": "header"
+              },
+            ], 
+          },
+        },
+      }
+    when "skip"
+      "Do something"
+    else
+      "Something went wrong"
     end
   end
 end
