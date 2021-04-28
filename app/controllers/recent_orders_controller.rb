@@ -15,7 +15,7 @@ class RecentOrdersController < ApplicationController
             },
             {
               "type": "text",
-              "text": "This is your latest order",
+              "text": "This is your latest order #{params[:context][:location]} as of #{Time.now}",
               "style": "paragraph"
             },
             {
