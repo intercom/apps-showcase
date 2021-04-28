@@ -60,6 +60,7 @@ class RecentOrdersController < ApplicationController
   end
 
   def submit_url
+    Rails.logger.info("Component id:#{params}")
     if params[:component_id] == "cancel_order"
       render json: {
         canvas: {
@@ -73,7 +74,7 @@ class RecentOrdersController < ApplicationController
               {
                 "type": "text",
                 "text": "Why are you cancelling this order?",
-                "style": "text"
+                "style": "paragraph"
               },
               { 
                 type: "button", 
@@ -157,16 +158,18 @@ class RecentOrdersController < ApplicationController
               {
                 "type": "text",
                 "text": "*1 Mousepad*",
+                "style": "paragraph"
               },
               {
                 "type": "text",
                 "text": "*1 USB Port*",
+                "style": "paragraph"
               },
               { 
                 type: "button", 
                 label: "Cancel this order", 
                 style: "primary", 
-                id: "cancel_order", 
+                id: "cancel_order_1", 
                 action: {type: "submit"} 
               },
               {
@@ -174,7 +177,7 @@ class RecentOrdersController < ApplicationController
               },
               {
                 "type": "text",
-                "text": "*Order #: 234567*",
+                "text": "*Order #: 345678*",
                 "style": "header"
               },
               {
@@ -183,17 +186,19 @@ class RecentOrdersController < ApplicationController
               },
               {
                 "type": "text",
-                "text": "*1 Mousepad*",
+                "text": "*1 Lamp*",
+                "style": "paragraph"
               },
               {
                 "type": "text",
-                "text": "*1 USB Port*",
+                "text": "*2 Pillow*",
+                "style": "paragraph"
               },
               { 
                 type: "button", 
                 label: "Cancel this order", 
                 style: "primary", 
-                id: "cancel_order", 
+                id: "cancel_order_2", 
                 action: {type: "submit"} 
               }
             ], 
