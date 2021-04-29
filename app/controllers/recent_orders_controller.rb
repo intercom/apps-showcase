@@ -240,13 +240,14 @@ class RecentOrdersController < ApplicationController
         },
       }
     when "submit_feedback"
+      Rails.logger.info("Feedback submitted: #{params[:input_values]}")
       render json: {
         canvas: {
           content: {
             components: [
               {
                 "type": "text",
-                "text": "Thank you for your feedback",
+                "text": "Thank you for your feedback. Your order has been canceled",
                 "style": "header"
               },
             ], 
@@ -254,9 +255,33 @@ class RecentOrdersController < ApplicationController
         },
       }
     when "skip"
-      "Do something"
+      render json: {
+        canvas: {
+          content: {
+            components: [
+              {
+                "type": "text",
+                "text": "Your order has been canceled",
+                "style": "header"
+              },
+            ], 
+          },
+        },
+      }
     else
-      "Something went wrong"
+      render json: {
+        canvas: {
+          content: {
+            components: [
+              {
+                "type": "text",
+                "text": "Something went wrong",
+                "style": "header"
+              },
+            ], 
+          },
+        },
+      }
     end
   end
 end
