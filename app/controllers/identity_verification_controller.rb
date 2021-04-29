@@ -8,19 +8,7 @@ class IdentityVerificationController < ApplicationController
               "type": "text",
               "text": "*Identity Verification*",
               "style": "header"
-            },
-            {
-              "type": "text",
-              "text": "For your safety, we need to verify it's really you. Click the button to receive a verification code via SMS to 0774855417",
-              "style": "paragraph"
-            },
-            { 
-              type: "button", 
-              label: "Get verification code", 
-              style: "primary", 
-              id: "get_verification_code", 
-              action: {type: "submit"} 
-            },
+            }
           ], 
         },
       },
