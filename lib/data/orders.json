@@ -1,0 +1,44 @@
+[
+    {
+        "id": 123456,
+        "status": "Dispatched",
+        "purchase_date": "2021-03-20",
+        "items": [
+            {
+                "quantity": 2,
+                "description": "Slippers"
+            },
+            {
+                "quantity": 1,
+                "description": "Coffee Cup"
+            }
+        ]
+    },
+    {
+        "id": 234567,
+        "status": "Dispatched",
+        "purchase_date": "2021-02-20",
+        "items": [
+            {
+                "quantity": 2,
+                "description": "Pillow"
+            },
+            {
+                "quantity": 1,
+                "description": "Armchair"
+            }
+        ]
+    },
+    {
+        "id": 345678,
+        "status": "Dispatched",
+        "purchase_date": "2021-01-20",
+        "items": [
+            {
+                "quantity": 1,
+                "description": "Chair"
+            }
+        ]
+    }
+
+]

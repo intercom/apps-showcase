@@ -4,207 +4,23 @@ class RecentOrdersController < ApplicationController
   # after_action :allow_iframe, only: :submit_sheet_url
 
   def initialize_url
-    render json: {
-      canvas: {
-        content: {
-          components: [
-            {
-              "type": "text",
-              "text": "*Cancel your order*",
-              "style": "header"
-            },
-            {
-              "type": "text",
-              "text": "This is your latest order #{params[:context][:location]} as of #{Time.now}",
-              "style": "paragraph"
-            },
-            {
-              "type": "text",
-              "text": "*Order #: 123456*",
-              "style": "header"
-            },
-            {
-              "type": "divider"
-            },
-            {
-              "type": "text",
-              "text": "*2 Slippers*",
-            },
-            {
-              "type": "text",
-              "text": "*1 Coffee cup*",
-            },
-            {
-              "type": "text",
-              "text": "Do you want to cancel this one, or another?",
-              "style": "paragraph"
-            },
-            { 
-              type: "button", 
-              label: "Cancel this order", 
-              style: "primary", 
-              id: "cancel_order", 
-              action: {type: "submit"} 
-            },
-            { 
-              type: "button", 
-              label: "Choose another", 
-              style: "secondary", 
-              id: "choose_another", 
-              action: {type: "submit"} 
-            },
-          ], 
-        },
-      },
-    }
+    order_file = File.read('./lib/data/orders.json')
+    orders = JSON.parse(order_file)
+    latest_order = orders.first #Should actually sort by date
+    render json: RecentOrders.cancel_order_canvas(order: latest_order)
   end
 
   def submit_url
+    order_id = extract_order_id(component_id: params[:component_id])
     case params[:component_id]
     when /\Acancel_order_/
-      render json: {
-        canvas: {
-          content: {
-            components: [
-              {
-                "type": "text",
-                "text": "*Please help us out*",
-                "style": "header"
-              },
-              {
-                "type": "text",
-                "text": "Why are you cancelling this order?",
-                "style": "paragraph"
-              },
-              { 
-                type: "button", 
-                label: "Takes too long", 
-                style: "secondary", 
-                id: "reason_time", 
-                action: {type: "submit"} 
-              },
-              { 
-                type: "button", 
-                label: "Mistake in my customer data", 
-                style: "secondary", 
-                id: "reason_data_mistake", 
-                action: {type: "submit"} 
-              },
-              { 
-                type: "button", 
-                label: "Ordered incorrectly", 
-                style: "secondary", 
-                id: "reason_ordered_incorrectly", 
-                action: {type: "submit"} 
-              },
-              { 
-                type: "button", 
-                label: "Purchase price is too high", 
-                style: "secondary", 
-                id: "reason_price", 
-                action: {type: "submit"} 
-              },
-              { 
-                type: "button", 
-                label: "Don't want a credit/identity check", 
-                style: "secondary", 
-                id: "reason_credit_check", 
-                action: {type: "submit"} 
-              },
-              { 
-                type: "button", 
-                label: "Changed my mind", 
-                style: "secondary", 
-                id: "reason_changed_mind", 
-                action: {type: "submit"} 
-              },
-              { 
-                type: "button", 
-                label: "Forgot to use a voucher", 
-                style: "secondary", 
-                id: "reason_voucher", 
-                action: {type: "submit"} 
-              },
-              { 
-                type: "button", 
-                label: "Other", 
-                style: "secondary", 
-                id: "reason_other", 
-                action: {type: "submit"} 
-              },
-            ], 
-          },
-        },
-      }
+      if order_id.present?
+        render json: RecentOrders.cancel_order_component(order_id: order_id)
+      else
+        #Add error component
+      end
     when "choose_another"
-      render json: {
-        canvas: {
-          content: {
-            components: [
-              {
-                "type": "text",
-                "text": "*Your recent orders*",
-                "style": "header"
-              },
-              {
-                "type": "text",
-                "text": "*Order #: 234567*",
-                "style": "header"
-              },
-              {
-                "type": "spacer",
-                "size": "xs"
-              },
-              {
-                "type": "text",
-                "text": "*1 Mousepad*",
-                "style": "paragraph"
-              },
-              {
-                "type": "text",
-                "text": "*1 USB Port*",
-                "style": "paragraph"
-              },
-              { 
-                type: "button", 
-                label: "Cancel this order", 
-                style: "primary", 
-                id: "cancel_order_1", 
-                action: {type: "submit"} 
-              },
-              {
-                "type": "divider"
-              },
-              {
-                "type": "text",
-                "text": "*Order #: 345678*",
-                "style": "header"
-              },
-              {
-                "type": "spacer",
-                "size": "xs"
-              },
-              {
-                "type": "text",
-                "text": "*1 Lamp*",
-                "style": "paragraph"
-              },
-              {
-                "type": "text",
-                "text": "*2 Pillow*",
-                "style": "paragraph"
-              },
-              { 
-                type: "button", 
-                label: "Cancel this order", 
-                style: "primary", 
-                id: "cancel_order_2", 
-                action: {type: "submit"} 
-              }
-            ], 
-          },
-        },
-      }
+      render json: RecentOrders.recent_orders_component()
     when /\Areason_/
       render json: {
         canvas: {
@@ -283,5 +99,10 @@ class RecentOrdersController < ApplicationController
         },
       }
     end
+  end
+
+  #MOVE SOMEWHERE ELSE
+  def extract_order_id(component_id:)
+    component_id.match(/.*_(\w+)/)[1]
   end
 end
