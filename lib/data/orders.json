@@ -6,11 +6,15 @@
         "items": [
             {
                 "quantity": 2,
-                "description": "Slippers"
+                "description": "Slippers",
+                "price": "22",
+                "image": "https://apps-showcase.herokuapp.com/assets/tick.png"
             },
             {
                 "quantity": 1,
-                "description": "Coffee Cup"
+                "description": "Coffee Cup",
+                "price": "4",
+                "image": "https://apps-showcase.herokuapp.com/assets/tick.png"
             }
         ]
     },
@@ -21,11 +25,15 @@
         "items": [
             {
                 "quantity": 2,
-                "description": "Pillow"
+                "description": "Pillow",
+                "price": "20",
+                "image": "https://apps-showcase.herokuapp.com/assets/tick.png"
             },
             {
                 "quantity": 1,
-                "description": "Armchair"
+                "description": "Armchair",
+                "price": "1500",
+                "image": "https://apps-showcase.herokuapp.com/assets/tick.png"
             }
         ]
     },
@@ -36,7 +44,9 @@
         "items": [
             {
                 "quantity": 1,
-                "description": "Chair"
+                "description": "Chair",
+                "price": "200",
+                "image": "https://apps-showcase.herokuapp.com/assets/tick.png"
             }
         ]
     }

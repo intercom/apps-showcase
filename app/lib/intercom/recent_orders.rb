@@ -46,7 +46,7 @@ module Intercom
           "id": "list-item-#{index}",
           "title": item["description"],
           "subtitle": "Quantity: #{item["quantity"]}",
-          "tertiary_text": "blabla", 
+          "tertiary_text": "Price: $#{item["price"]}",
           "image": "https://blog.intercomassets.com/wp-content/uploads/2018/11/29150555/marin_martinic.jpg",
           "image_width": 48,
           "image_height": 48,
@@ -156,7 +156,21 @@ module Intercom
         }
       ]
       #TODO: refactor 
+
+      
       order_components = orders.map.with_index do |order, index| 
+
+        {
+          "type": "item",
+          "id": "list-item-#{index}",
+          "title": item["description"],
+          "subtitle": "Quantity: #{item["quantity"]}",
+          "tertiary_text": "Price: $#{item["price"]}",
+          "image": item["image"],
+          "image_width": 48,
+          "image_height": 48,
+          "rounded_image": true
+        }
         comp = self.order_components(order: order)
         comp << { 
           "type": "button", 
