@@ -7,9 +7,10 @@ class BalanceCheckController < ApplicationController
 
     def submit_url
         if params[:component_id] == "get_verification_code"
-            verified = IdentityVerification.verify_submission(email: params[:email], code: params[:input_values])
-            if verified 
-                render Balance.balance_component(email: params[:email])
+            email = params[:customer][:email]
+            verification_code = params[:input_values][:enter_verification_code]
+            if IdentityVerification.verify_submission(email: email, verification_code: verification_code) 
+                render Balance.balance_component(email: email)
             else
                 render IdentityVerification.identity_verification_failed_canvas
             end

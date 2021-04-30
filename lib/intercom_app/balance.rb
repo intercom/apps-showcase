@@ -1,15 +1,15 @@
 module IntercomApp
     class Balance
-      def self.balance_component(email:)
+      def self.balance_canvas(email:)
         # We'd ideally use a service to find balance
-        balance = Rand(email.length)
-        json: {
+        # balance = Rand(email.length)
+        {
           canvas: {
             content: {
               components: [
                 {
                   "type": "text",
-                  "text": "Your balance is #{balance}",
+                  "text": "Your balance is #{Rand(10)}",
                   "style": "paragraph"
                 }
               ],

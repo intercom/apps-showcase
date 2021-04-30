@@ -28,8 +28,8 @@
       }
     end
 
-    def self.verify_submission(email:, code:)
-      Rails.logger.info("Verifying submission for email: #{email}, code: #{code}")
+    def self.verify_submission(email:, verification_code:)
+      Rails.logger.info("Verifying submission for email: #{email}, verification_code: #{verification_code}")
       [true, false].sample
     end
 
