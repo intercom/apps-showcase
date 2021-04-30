@@ -13,7 +13,7 @@
           "style": "paragraph"
         }
       ]
-      components += self.order_component(order: order)
+      components += self.order_components(order: order)
       components += [
         {
           "type": "text",
@@ -44,16 +44,17 @@
       }
     end
 
-    def self.order_component(items)
+    def self.order_components(order:)
       components = [{
         "type": "text",
         "text": "*Order #: #{order["id"]}*",
         "style": "header"
       },
       {
-        "type": "divider"
+        "type": "spacer",
+        "size": "xs"
       }]
-      components += items.map do |item|
+      components += order["items"].map do |item|
         {
           "type": "text",
           "text": "*#{item["quantity"]} #{item["description"]}*",
@@ -63,8 +64,7 @@
       components
     end
 
-    def self.cancel_order_component(order_id:)
-      # Here we would cancel the order
+    def self.cancel_order_canvas()
       {
         canvas: {
           content: {
@@ -141,10 +141,7 @@
       }
     end
 
-    def self.recent_orders_component
-      order_file = File.read('./lib/data/orders.json')
-      orders = JSON.parse(order_file)
-      orders.drop(1) #Should actually remove the latest
+    def self.recent_orders_canvas(orders:)
       components = [
         {
           "type": "text",
@@ -152,13 +149,101 @@
           "style": "header"
         }
       ]
-      components += orders.map{|order| self.order_components(order: order)}.flatten
-    
-      # Should add space in between orders
+      #TODO: rename 
+      order_components = orders.map.with_index do |order, index| 
+        comp = self.order_components(order: order)
+        comp << { "type": "divider" } unless index == orders.length - 1
+        comp
+      end
+      components += order_components.flatten
       return {
         canvas: {
           content: {
             components: components
+          },
+        },
+      }
+    end
+
+    def self.feedback_canvas
+      {
+        canvas: {
+          content: {
+            components: [
+              {
+                "type": "text",
+                "text": "*Please help us out*",
+                "style": "header"
+              },
+              {
+                "type": "textarea",
+                "id": "feedback",
+                "label": "Any additional comments? Feel free to leave them here",
+                "placeholder": "Leave your feedback..."
+              },
+              { 
+                type: "button", 
+                label: "Submit feedback", 
+                style: "primary", 
+                id: "submit_feedback", 
+                action: {type: "submit"} 
+              },
+              { 
+                type: "button", 
+                label: "Skip", 
+                style: "secondary", 
+                id: "skip", 
+                action: {type: "submit"} 
+              }
+            ], 
+          },
+        },
+      }
+    end
+
+    def self.feedback_submitted_canvas
+      {
+        canvas: {
+          content: {
+            components: [
+              {
+                "type": "text",
+                "text": "Thank you for your feedback. Your order has been canceled",
+                "style": "header"
+              },
+            ], 
+          },
+        },
+      }
+    end
+
+    def self.no_feedback_submitted_canvas
+      {
+        canvas: {
+          content: {
+            components: [
+              {
+                "type": "text",
+                "text": "Your order has been canceled",
+                "style": "header"
+              },
+            ], 
+          },
+        },
+      }
+    end
+
+    def self.error_canvas
+      {
+        canvas: {
+          content: {
+            components: [
+              {
+                "type": "text",
+                "text": "Something went wrong",
+                "style": "header"
+              },
+            ], 
           },
         },
       }
