@@ -28,7 +28,7 @@ class RecentOrdersController < ApplicationController
       cancel_reason = extract_cancel_reason(component_id: params[:component_id])
       # Do something with cancel_reason
       Rails.logger.info("Cancelling order for reason: #{}")
-      render json RecentOrders.feedback_canvas
+      render json: RecentOrders.feedback_canvas
     when "submit_feedback"
       # Do something with feedback submitted
       Rails.logger.info("Feedback submitted: #{params[:input_values]}")
