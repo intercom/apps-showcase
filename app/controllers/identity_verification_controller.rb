@@ -13,7 +13,7 @@ class IdentityVerificationController < ApplicationController
     when "submit_verification_code"
       email = params[:customer][:email]
       verification_code = params[:input_values][:enter_verification_code]
-      if IdentityVerification.verify_submission(email: email, verification_code: verification_code)
+      if Intercom::IdentityVerification.verify_submission(email: email, verification_code: verification_code)
         render json: Intercom::IdentityVerification.identity_verification_succeeded_canvas
       else
         render json: Intercom::IdentityVerification.identity_verification_failed_canvas
