@@ -120,7 +120,7 @@ module Intercom
               {
                 "type": "text",
                 "text": "Something went wrong",
-                "style": "header"
+                "style": "error"
               },
             ], 
           },

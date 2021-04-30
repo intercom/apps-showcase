@@ -9,7 +9,7 @@ module Intercom
               components: [
                 {
                   "type": "text",
-                  "text": "Your balance is #{Rand(10)}",
+                  "text": "Your balance is *#{Rand(10)}*",
                   "style": "paragraph"
                 }
               ],

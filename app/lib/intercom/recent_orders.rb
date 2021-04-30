@@ -6,11 +6,6 @@ module Intercom
           "type": "text",
           "text": "*Cancel your order*",
           "style": "header"
-        },
-        {
-          "type": "text",
-          "text": "This is your latest order as of #{Time.now}",
-          "style": "paragraph"
         }
       ]
       components += self.order_components(order: order)
@@ -231,7 +226,7 @@ module Intercom
             components: [
               {
                 "type": "text",
-                "text": "Your order has been canceled",
+                "text": "Your order has been cancelled",
                 "style": "header"
               },
             ], 
@@ -248,7 +243,7 @@ module Intercom
               {
                 "type": "text",
                 "text": "Something went wrong",
-                "style": "header"
+                "style": "error"
               },
             ], 
           },
