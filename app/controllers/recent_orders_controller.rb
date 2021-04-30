@@ -14,7 +14,7 @@ class RecentOrdersController < ApplicationController
       order_id = extract_order_id(component_id: params[:component_id])
       if order_id.present?
         # Cancel the order
-        render json: RecentOrders.cancel_order_canvas(order_id: order_id)
+        render json: RecentOrders.reason_to_cancel_order_canvas
       else
         Rails.logger.info("Order id not found. Component_id: #{params[:component_id]}")
         render json: RecentOrders.error_canvas

@@ -64,7 +64,7 @@
       components
     end
 
-    def self.cancel_order_canvas()
+    def self.reason_to_cancel_order_canvas()
       {
         canvas: {
           content: {
