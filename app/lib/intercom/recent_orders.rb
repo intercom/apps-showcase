@@ -40,7 +40,21 @@ module Intercom
     end
 
     def self.order_components(order:)
-      components = [{
+      items = order["items"].map.with_index do |item, index|
+        {
+          "type": "item",
+          "id": "list-item-#{index}"
+          "title": item["description"],
+          "subtitle": "Quantity: #{item["quantity"]}",
+          "tertiary_text": "blabla", 
+          "image": "https://blog.intercomassets.com/wp-content/uploads/2018/11/29150555/marin_martinic.jpg",
+          "image_width": 48,
+          "image_height": 48,
+          "rounded_image": true
+        }
+      end
+      
+      return [{
         "type": "text",
         "text": "*Order #: #{order["id"]}*",
         "style": "header"
@@ -48,15 +62,12 @@ module Intercom
       {
         "type": "spacer",
         "size": "xs"
+      },
+      {
+        "type": "list",
+        "disabled": false,
+        "items": items
       }]
-      components += order["items"].map do |item|
-        {
-          "type": "text",
-          "text": "*#{item["quantity"]} #{item["description"]}*",
-          "style": "paragraph"
-        }
-      end
-      components
     end
 
     def self.reason_to_cancel_order_canvas
