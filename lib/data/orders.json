@@ -8,13 +8,13 @@
                 "quantity": 2,
                 "description": "Slippers",
                 "price": "22",
-                "image": "https://apps-showcase.herokuapp.com/assets/tick.png"
+                "image": "https://apps-showcase.herokuapp.com/images/tick.png"
             },
             {
                 "quantity": 1,
                 "description": "Coffee Cup",
                 "price": "4",
-                "image": "https://apps-showcase.herokuapp.com/assets/tick.png"
+                "image": "https://apps-showcase.herokuapp.com/images/tick.png"
             }
         ]
     },
@@ -27,13 +27,13 @@
                 "quantity": 2,
                 "description": "Pillow",
                 "price": "20",
-                "image": "https://apps-showcase.herokuapp.com/assets/tick.png"
+                "image": "https://apps-showcase.herokuapp.com/images/tick.png"
             },
             {
                 "quantity": 1,
                 "description": "Armchair",
                 "price": "1500",
-                "image": "https://apps-showcase.herokuapp.com/assets/tick.png"
+                "image": "https://apps-showcase.herokuapp.com/images/tick.png"
             }
         ]
     },
@@ -46,7 +46,7 @@
                 "quantity": 1,
                 "description": "Chair",
                 "price": "200",
-                "image": "https://apps-showcase.herokuapp.com/assets/tick.png"
+                "image": "https://apps-showcase.herokuapp.com/images/tick.png"
             }
         ]
     }
