@@ -1,4 +1,4 @@
-module IntercomApp
+module Intercom
     class Balance
       def self.balance_canvas(email:)
         # We'd ideally use a service to find balance

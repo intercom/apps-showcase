@@ -5,7 +5,7 @@ class RecentOrdersController < ApplicationController
     order_file = File.read('./lib/data/orders.json')
     orders = JSON.parse(order_file)
     latest_order = orders.first #Should actually sort by date
-    render json: RecentOrders.cancel_order_canvas(order: latest_order)
+    render json: Intercom::RecentOrders.cancel_order_canvas(order: latest_order)
   end
 
   def submit_url
@@ -14,29 +14,29 @@ class RecentOrdersController < ApplicationController
       order_id = extract_order_id(component_id: params[:component_id])
       if order_id.present?
         # Cancel the order
-        render json: RecentOrders.reason_to_cancel_order_canvas
+        render json: Intercom::RecentOrders.reason_to_cancel_order_canvas
       else
         Rails.logger.info("Order id not found. Component_id: #{params[:component_id]}")
-        render json: RecentOrders.error_canvas
+        render json: Intercom::RecentOrders.error_canvas
       end
     when "choose_another"
       order_file = File.read('./lib/data/orders.json')
       orders = JSON.parse(order_file)
       orders.drop(1)
-      render json: RecentOrders.recent_orders_canvas(orders: orders)
+      render json: Intercom::RecentOrders.recent_orders_canvas(orders: orders)
     when /\Areason_/
       cancel_reason = extract_cancel_reason(component_id: params[:component_id])
       # Do something with cancel_reason
       Rails.logger.info("Cancelling order for reason: #{cancel_reason}")
-      render json: RecentOrders.feedback_canvas
+      render json: Intercom::RecentOrders.feedback_canvas
     when "submit_feedback"
       # Do something with feedback submitted
       Rails.logger.info("Feedback submitted: #{params[:input_values][:feedback]}")
-      render json: RecentOrders.feedback_submitted_canvas
+      render json: Intercom::RecentOrders.feedback_submitted_canvas
     when "skip"
-      render json: RecentOrders.no_feedback_submitted_canvas
+      render json: Intercom::RecentOrders.no_feedback_submitted_canvas
     else
-      render json: RecentOrders.error_canvas
+      render json: Intercom::RecentOrders.error_canvas
     end
   end
 

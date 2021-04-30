@@ -73,7 +73,7 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  config.hosts << "45410335d264.ngrok.io"
+  config.hosts << "593266780cb1.ngrok.io"
   config.autoload_paths += Dir["#{config.root}/lib/intercom_app/"]
   config.eager_load_paths += Dir["#{config.root}/lib/intercom_app/"]
 end

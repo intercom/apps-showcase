@@ -1,4 +1,4 @@
-# module IntercomApp
+module Intercom
   class RecentOrders
     def self.cancel_order_canvas(order:)
       components = [
@@ -256,4 +256,4 @@
       }
     end
   end
-# end
+end

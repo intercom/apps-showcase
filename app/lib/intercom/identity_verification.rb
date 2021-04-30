@@ -1,4 +1,4 @@
-# module IntercomApp
+module Intercom
   class IdentityVerification
     def self.send_code_canvas
       {
@@ -128,4 +128,4 @@
       }
     end
   end
-# end
+end
