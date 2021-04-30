@@ -46,6 +46,6 @@ class RecentOrdersController < ApplicationController
   end
 
   def extract_cancel_reason(component_id:)
-    component_id.match(/.*_(\w+)/)[1]
+    component_id.match(/\Areason_(.*)/)[1]
   end
 end

@@ -149,9 +149,16 @@
           "style": "header"
         }
       ]
-      #TODO: rename 
+      #TODO: refactor 
       order_components = orders.map.with_index do |order, index| 
         comp = self.order_components(order: order)
+        comp << { 
+          "type": "button", 
+          "label": "Cancel this order", 
+          "style": "primary", 
+          "id": "cancel_order_#{order["id"]}", 
+          "action": {"type": "submit"} 
+        }
         comp << { "type": "divider" } unless index == orders.length - 1
         comp
       end
