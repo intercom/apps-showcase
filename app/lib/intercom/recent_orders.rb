@@ -43,7 +43,7 @@ module Intercom
       items = order["items"].map.with_index do |item, index|
         {
           "type": "item",
-          "id": "list-item-#{index}"
+          "id": "list-item-#{index}",
           "title": item["description"],
           "subtitle": "Quantity: #{item["quantity"]}",
           "tertiary_text": "blabla", 
